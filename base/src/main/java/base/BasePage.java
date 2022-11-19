@@ -30,7 +30,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 
 public class BasePage {
 
@@ -82,7 +81,7 @@ public class BasePage {
 
     @Parameters({"driverConfigEnabled", "browser", "url"})
     @BeforeMethod
-    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("http://espn.com") String url) {
+    public void driverSetup(@Optional("true") String driverConfigEnabled, @Optional("chrome") String browser, @Optional("https://freecrm.com/") String url) {
         if (Boolean.parseBoolean(driverConfigEnabled)) {
             driverInit(browser);
             driver.get(url);
@@ -350,5 +349,11 @@ public class BasePage {
         return calendar.getTime();
     }
     // endregion
+
+    //methods added by me:
+
+    public void waitForVisibilityOfElement(WebElement element) {
+        webDriverWait.until(ExpectedConditions.visibilityOf(element));
+    }
 
 }
